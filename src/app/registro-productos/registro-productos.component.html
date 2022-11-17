@@ -1,0 +1,72 @@
+<head>
+    <style>
+      #img{
+        display: none;
+      }
+      #informacion {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+  <h1>Registro de Productos</h1>
+  <div class="formularioRegistro" *ngIf="isShown" class="row container-fluid"  id="divshow">
+      <h2>Editar Cliente</h2>
+      <form [formGroup]="productoForm" (ngSubmit) = "Guardar()">
+        <div class="form-group">
+          <label>Nombre Producto</label>
+          <input type="text" formControlName="nombre" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Descripcion Producto</label>
+          <input type="text" formControlName="descrip" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Cantidad</label>
+          <input type="number" formControlName="cantidad" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Valor</label>
+          <input type="number" formControlName="valor" class="form-control">
+        </div>
+    
+        <button type="submit" class="btn btn-primary" [disabled]="productoForm.invalid">Guardar</button>
+    
+        </form>
+    </div>
+    <div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre Producto</th>
+              <th>Descripcion Producto</th>
+              <th>Cantidad</th>
+              <th>Valor</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of productos">
+              <td>{{item.id}}</td>
+              <td>{{item.nombre}}</td>
+              <td>{{item.descrip}}</td>
+              <td>{{item.cantidad}}</td>
+              <td>{{item.valor}}</td>
+              <td>
+                <button type="button" class="btn btn-dark" (click)="Eliminar(item)">Eliminar</button>
+                <button type="button" class="btn btn-warning" (click)="Editar(item)">Editar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <!--<button (click)="toggleShow()" type="checkbox" >show/hide</button>-->
+  
+      <!--<div *ngIf="isShown" class="row container-fluid"  id="divshow" >
+      Div Content
+      
+      </div>-->
+  </body>
+  

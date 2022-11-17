@@ -1,0 +1,89 @@
+<head>
+  <style>
+    #img{
+      display: none;
+    }
+    #informacion {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<h1>Registro de Clientes</h1>
+<div class="formularioRegistro" *ngIf="isShown" class="row container-fluid"  id="divshow">
+    <h2>Editar Cliente</h2>
+    <form [formGroup]="clienteForm" (ngSubmit) = "Guardar()">
+      <div class="form-group">
+        <label>Nombres</label>
+        <input type="text" formControlName="nombre" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Apellidos</label>
+        <input type="text" formControlName="apellido" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Cedula</label>
+        <input type="number" formControlName="cedula" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Edad</label>
+        <input type="number" formControlName="edad" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Pais</label>
+        <select name="country" id="country" formControlName="country" class="form-control" >
+          <option [ngValue]="item" *ngFor="let item of countries">{{item.nombre}}</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label>Estado o Departamento</label>
+        <select name="estado" id="estado" formControlName="estado" class="form-control">
+          <option [ngValue]="item" *ngFor="let item of estados">{{item.nombre}}</option>
+        </select>
+      </div>
+  
+      <button type="submit" class="btn btn-primary" [disabled]="clienteForm.invalid">Guardar</button>
+  
+      </form>
+  </div>
+  <div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Cedula</th>
+            <th>Edad</th>
+            <th>Pais</th>
+            <th>Estado o Departamento</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of clientes">
+            <td>{{item.id}}</td>
+            <td>{{item.nombre}}</td>
+            <td>{{item.apellido}}</td>
+            <td>{{item.cedula}}</td>
+            <td>{{item.edad}}</td>
+            <td>{{item.country.nombre}}</td>
+            <td>{{item.estado.nombre}}</td>
+            <td>
+              <button type="button" class="btn btn-dark" (click)="Eliminar(item)">Eliminar</button>
+              <button type="button" class="btn btn-warning" (click)="Editar(item)">Editar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!--<button (click)="toggleShow()" type="checkbox" >show/hide</button>-->
+
+    <!--<div *ngIf="isShown" class="row container-fluid"  id="divshow" >
+    Div Content
+    
+    </div>-->
+</body>
+
